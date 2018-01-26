@@ -8,11 +8,6 @@ import javafx.stage.Stage;
 import eu.demo.address.model.Person;
 import eu.demo.address.util.DateUtil;
 
-/**
- * Dialog to edit details of a person.
- * 
- * @author Marco Jakob
- */
 public class PersonEditDialogController {
 
     @FXML
