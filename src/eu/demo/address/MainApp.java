@@ -23,6 +23,7 @@ import javax.xml.bind.Unmarshaller;
 
 import eu.demo.address.model.Person;
 import eu.demo.address.model.PersonListWrapper;
+import eu.demo.address.view.BirthdayStatisticsController;
 import eu.demo.address.view.PersonEditDialogController;
 import eu.demo.address.view.PersonOverviewController;
 import eu.demo.address.view.RootLayoutController;
@@ -155,10 +156,10 @@ public class MainApp extends Application {
             PersonEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setPerson(person);
-
+            
             // Set the dialog icon.
             dialogStage.getIcons().add(new Image("file:resources/images/edit.png"));
-            
+
             // Show the dialog and wait until the user closes it
             dialogStage.showAndWait();
 
@@ -166,6 +167,36 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+    
+    /**
+     * Opens a dialog to show birthday statistics.
+     */
+    public void showBirthdayStatistics() {
+        try {
+            // Load the fxml file and create a new stage for the popup.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/BirthdayStatistics.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Birthday Statistics");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            
+            // Set the dialog icon.
+            dialogStage.getIcons().add(new Image("file:resources/images/calendar.png"));
+
+            // Set the persons into the controller.
+            BirthdayStatisticsController controller = loader.getController();
+            controller.setPersonData(personData);
+
+            dialogStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     
